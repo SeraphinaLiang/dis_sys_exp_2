@@ -65,3 +65,89 @@ C:\Users\pc\IdeaProjects\ds-1-2-soap>curl --header "content-type: text/xml" -d @
 </ns2:addOrderResponse>
 /SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
+
+--------------------------addition question---------------------------
+1. Which HTTP verb (method) is used by SOAP for the request to get the cheapest meal?---POST
+   Which HTTP verb is used to add the order?---POST
+   You can use the -v option of curl to get more verbose information about the request you make.
+
+curl --header "content-type: text/xml" -v -d @requestcheapest.xml http://localhost:8080/ws
+
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> POST /ws HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+> content-type: text/xml
+> Content-Length: 250
+>
+* upload completely sent off: 250 out of 250 bytes
+< HTTP/1.1 200
+< Accept: text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+< SOAPAction: ""
+< Content-Type: text/xml;charset=utf-8
+< Content-Length: 446
+< Date: Wed, 20 Oct 2021 16:18:32 GMT
+
+curl --header "content-type: text/xml" -v -d @requestorder.xml http://localhost:8080/ws
+
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 8080 (#0)
+> POST /ws HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/7.55.1
+> Accept: */*
+> content-type: text/xml
+> Content-Length: 431
+>
+* upload completely sent off: 431 out of 431 bytes
+< HTTP/1.1 200
+< Accept: text/xml, text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2
+< SOAPAction: ""
+< Content-Type: text/xml;charset=utf-8
+< Content-Length: 398
+< Date: Wed, 20 Oct 2021 16:21:50 GMT
+
+2. When making an order, what is the content-length and content-type of the HTTP request and
+   response?
+   request:
+     > content-type: text/xml
+     > Content-Length: 431
+
+   response:
+     < Content-Type: text/xml;charset=utf-8
+     < Content-Length: 398
+
+3. If you ask for a non-existing meal, or a non-existing SOAP operation in the request, which HTTP
+   response code is returned for each of those erroneous requests?
+
+   for a non-existing meal: 200
+   for wrong order ,give a wrong meal name : 500
+   a non-existing SOAP operation: 404
+
+4. Using the command below, you can ask the service for its WSDL, which specifies the interface of the
+   SOAP service and how to communicate with the service. Which concepts do you find in this WSDL
+   in addition to what you specified in the meals.xsd? What is the SOAP binding style and transport
+   configuration?
+
+   $ curl http://localhost:8080/ws/meals.wsdl
+
+   <wsdl:message name="getMealRequest">
+   <wsdl:part element="tns:getMealRequest" name="getMealRequest"> </wsdl:part>
+   </wsdl:message>
+
+   <wsdl:portType name="MealsPort">
+   <wsdl:operation name="getMeal">
+   <wsdl:input message="tns:getMealRequest" name="getMealRequest"> </wsdl:input>
+   <wsdl:output message="tns:getMealResponse" name="getMealResponse"> </wsdl:output>
+   </wsdl:operation>
+   </wsdl:portType>
+
+   new concepts: message,part,portType,operation, input, output
+
+   <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+   SOAP binding style: document,  transport configuration: "http://schemas.xmlsoap.org/soap/http"
+
