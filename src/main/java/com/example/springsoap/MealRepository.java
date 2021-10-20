@@ -69,7 +69,7 @@ public class MealRepository {
         if (meals.size() == 0) return null;
 
         var values = meals.values();
-        return values.stream().max(Comparator.comparing(Meal::getPrice)).orElseThrow(NoSuchElementException::new);
+        return values.stream().min(Comparator.comparing(Meal::getPrice)).orElseThrow(NoSuchElementException::new);
 
     }
 
