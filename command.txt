@@ -1,0 +1,20 @@
+curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/ws
+
+curl --header "content-type: text/xml" -d @requestbiggest.xml http://localhost:8080/ws
+
+curl --header "content-type: text/xml" -d @requestcheapest.xml http://localhost:8080/ws
+
+curl --header "content-type: text/xml" -d @requestorder.xml http://localhost:8080/ws
+
+output:
+C:\Users\pc\IdeaProjects\ds-1-2-soap>curl --header "content-type: text/xml" -d @request.xml http://localhost:8080/ws
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:getMealResponse xmlns:ns2="http://foodmenu.io/cs/webservice"><ns2:meal><ns2:name>Portobello</ns2:name><ns2:kcal>637</ns2:kcal><ns2:price>15.8</ns2:price><ns2:description>Portobello Mushroom Burger</ns2:description><ns2:mealtype>vegan</ns2:mealtype></ns2:meal></ns2:getMealResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+C:\Users\pc\IdeaProjects\ds-1-2-soap>curl --header "content-type: text/xml" -d @requestbiggest.xml http://localhost:8080/ws
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:getLargestMealResponse xmlns:ns2="http://foodmenu.io/cs/webservice"><ns2:meal><ns2:name>Steak</ns2:name><ns2:kcal>1100</ns2:kcal><ns2:price>10.4</ns2:price><ns2:description>Steak with fries</ns2:description><ns2:mealtype>meat</ns2:mealtype></ns2:meal></ns2:getLargestMealResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+C:\Users\pc\IdeaProjects\ds-1-2-soap>curl --header "content-type: text/xml" -d @requestcheapest.xml http://localhost:8080/ws
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:getCheapestMealResponse xmlns:ns2="http://foodmenu.io/cs/webservice"><ns2:meal><ns2:name>Portobello</ns2:name><ns2:kcal>637</ns2:kcal><ns2:price>15.8</ns2:price><ns2:description>Portobello Mushroom Burger</ns2:description><ns2:mealtype>vegan</ns2:mealtype></ns2:meal></ns2:getCheapestMealResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+C:\Users\pc\IdeaProjects\ds-1-2-soap>curl --header "content-type: text/xml" -d @requestorder.xml http://localhost:8080/ws
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns2:addOrderResponse xmlns:ns2="http://foodmenu.io/cs/webservice"><ns2:orderConfirmation><ns2:address>Leuven 3000</ns2:address><ns2:mealList>Steak,Fish and Chips</ns2:mealList><ns2:price>15.9</ns2:price></ns2:orderConfirmation></ns2:addOrderResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
